@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
+import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import "react-pro-sidebar/dist/css/styles.css";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../theme";
@@ -16,20 +16,43 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import React from "react"
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isActive = selected === title;
+
   return (
     <MenuItem
-      active={selected === title}
-      style={{
-        color: colors.grey[100],
-      }}
+      active={isActive}
       onClick={() => setSelected(title)}
-      icon={icon}
+      icon={React.cloneElement(icon, {
+        style: {
+          color: isActive ? "#ffffff" : colors.grey[100],
+        },
+      })}
+      style={{
+        color: isActive ? "#ffffff" : colors.grey[100],
+        padding: "10px 16px",
+        margin: "6px 0",
+        borderRadius: "15px",
+        backgroundColor: isActive ? colors.primary[600] : "transparent",
+        transition: "background-color 0.3s ease",
+        width: "95%",
+        marginLeft: "2%",
+        boxSizing: "border-box",
+      }}
     >
-      <Typography>{title}</Typography>
+      <Typography
+        sx={{
+          color: isActive ? "#ffffff" : colors.grey[100],
+          whiteSpace: "normal",
+          wordWrap: "break-word",
+        }}
+      >
+        {title}
+      </Typography>
       <Link to={to} />
     </MenuItem>
   );
@@ -44,6 +67,12 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        height: "100vh",
+        width: isCollapsed ? "80px" : "250px",
+        zIndex: 1000,
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -116,7 +145,7 @@ const Sidebar = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "0%"}>
             <Item
               title="Dashboard"
               to="/"

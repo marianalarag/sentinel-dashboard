@@ -21,7 +21,10 @@ const Dashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        <Header
+          title="DASHBOARD"
+          subtitle="Welcome to your dashboard"
+        />
 
         <Box>
           <Button
@@ -53,17 +56,14 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title="12,361"
             subtitle="Emails Sent"
             progress="0.75"
             increase="+14%"
-            icon={
-              <EmailIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
-              />
-            }
+            icon={<EmailIcon sx={{ color: "1B184C", fontSize: "26px" }} />}
           />
         </Box>
         <Box
@@ -72,6 +72,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title="431,225"
@@ -91,12 +92,14 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title="32,441"
             subtitle="New Clients"
             progress="0.30"
             increase="+5%"
+            subtitleColor = "#1B184C"
             icon={
               <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
@@ -110,6 +113,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          borderRadius="20px"
         >
           <StatBox
             title="1,325,134"
@@ -129,11 +133,12 @@ const Dashboard = () => {
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          borderRadius="20px"
         >
           <Box
             mt="25px"
             p="0 30px"
-            display="flex "
+            display="flex"
             justifyContent="space-between"
             alignItems="center"
           >
@@ -156,7 +161,10 @@ const Dashboard = () => {
             <Box>
               <IconButton>
                 <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                  sx={{
+                    fontSize: "26px",
+                    color: colors.greenAccent[500],
+                  }}
                 />
               </IconButton>
             </Box>
@@ -170,13 +178,13 @@ const Dashboard = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
+          borderRadius="20px"
         >
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
             borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
             p="15px"
           >
             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
@@ -222,6 +230,7 @@ const Dashboard = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           p="30px"
+          borderRadius="20px"
         >
           <Typography variant="h5" fontWeight="600">
             Campaign
@@ -247,6 +256,7 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          borderRadius="20px"
         >
           <Typography
             variant="h5"
@@ -264,6 +274,7 @@ const Dashboard = () => {
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           padding="30px"
+          borderRadius="20px"
         >
           <Typography
             variant="h5"
@@ -275,6 +286,50 @@ const Dashboard = () => {
           <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
+        </Box>
+
+        {/* ROW 4 */}
+        <Box
+          gridColumn="span 4"
+          backgroundColor="#EBD036"
+          p="30px"
+          borderRadius="20px"
+        >
+          <Typography variant="h5" fontWeight="600">
+            Low
+          </Typography>
+          <Typography color={colors.grey[100]} mt="10px">
+            This is an additional row (ROW 4) where you can include summary
+            data,
+          </Typography>
+        </Box>
+        <Box
+          gridColumn="span 4"
+          backgroundColor="#FF9800"
+          p="30px"
+          borderRadius="20px"
+        >
+          <Typography variant="h5" fontWeight="600">
+            Medium
+          </Typography>
+          <Typography color={colors.grey[100]} mt="10px">
+            This is an additional row (ROW 4) where you can include summary
+            data.
+          </Typography>
+        </Box>
+        <Box
+          gridColumn="span 4"
+          backgroundColor="#D32F2F"
+          p="30px"
+          borderRadius="20px"
+        >
+          <Typography variant="h5" fontWeight="600">
+            High
+          </Typography>
+          <Typography color={colors.grey[100]} mt="10px">
+            This is an additional row (ROW 4) where you can include summary
+            data.
+          </Typography>
         </Box>
       </Box>
     </Box>
