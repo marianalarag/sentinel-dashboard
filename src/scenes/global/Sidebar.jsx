@@ -16,6 +16,10 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,6 +40,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -124,6 +129,26 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+
+            <MenuItem
+              onClick={() => {
+                signOut(auth)
+                  .then(() => {
+                    navigate("/");
+                  })
+                  .catch((error) => {
+                    console.error("Error al cerrar sesión:", error);
+                  });
+              }}
+              icon={<LogoutOutlinedIcon />}
+              style={{
+                color: "rgb(255,0,0)",
+                marginBottom: "10px",
+              }}
+            > 
+              <Typography>Cerrar sesión</Typography>
+            </MenuItem>
+
 
             <Typography
               variant="h6"
