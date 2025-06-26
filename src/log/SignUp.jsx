@@ -71,7 +71,7 @@ function SignUp() {
 
         <p className="login-redirect">
           Already have an account?{" "}
-          <span onClick={() => navigate("/login")} style={{ color: "#ff5722", cursor: "pointer" }}>
+          <span onClick={() => navigate("/login")} style={{ color: "#5a5959", cursor: "pointer" }}>
             Login
           </span>
         </p>

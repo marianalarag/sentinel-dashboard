@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -21,27 +21,20 @@ import Login from "./log/Login";
 import SignUp from "./log/SignUp";
 import ForgotPassword from "./log/ForgotPassword";
 
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
+import { useAuth } from "./components/AuthContext";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-  const [user, setUser] = useState(null);
   const location = useLocation();
+  const { user, loading } = useAuth();
 
-  // Detectar si es una pantalla pública
   const publicRoutes = ["/", "/signup", "/forgot-password"];
   const isPublicRoute = publicRoutes.includes(location.pathname);
 
-  // Detectar usuario autenticado
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return () => unsubscribe();
-  }, []);
+  if (loading) {
+    return <div style={{ textAlign: "center", marginTop: "2rem" }}>Cargando...</div>;
+  }
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -72,7 +65,7 @@ function App() {
               <Route path="/calendar" element={user ? <Calendar /> : <Navigate to="/" />} />
               <Route path="/geography" element={user ? <Geography /> : <Navigate to="/" />} />
 
-              {/* Ruta no encontrada */}
+              {/* Catch-all */}
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>

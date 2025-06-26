@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
-import './login.css'; // Aquí puedes definir AppWidget.headlineTextFeildStyle, etc.
+import { auth } from "../firebase";
+import './login.css'; 
 //import logo from './images/logo.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  //const auth = getAuth();
+  const auth = getAuth();
 
   const handleLogin = async () => {
     try {
-      //await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard'); // Reemplaza con tu ruta de BottomNav
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/dashboard'); 
     } catch (e) {
       if (e.code === 'auth/user-not-found') {
         alert("No User Found for that Email");
